@@ -3,7 +3,6 @@ on:
   push:
     branches: [ main ]
 
-
 permissions:
   contents: write
   
@@ -13,19 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: 获取源码  🛎️
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
+      
     - name: Node环境版本 🗜️
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v6
       with:
         node-version: 24
+        
     - name: 安装依赖 ⚙️
       run: |
         npm i pnpm -g
         pnpm i
+        
     - name: 打包 🏗️
       run: |
         pnpm run build
         touch dist/.nojekyll
+        
     - name: 部署 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
